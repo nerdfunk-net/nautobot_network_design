@@ -1,0 +1,84 @@
+devices:
+- name: pod1r1
+  manufacturer: cisco
+  device_type: vios_router
+  device_role: pod_router
+  site: pod1
+  status: active
+  interfaces:
+    - name: Loopback0
+      description: "iBGP LOOPBACK"
+      type: virtual
+      enabled: True
+      mtu: 1500
+      mgmt_only: False
+      ipv4_address: 10.0.1.1/32
+      vrf: global
+      status: active
+      tags: 
+        - ospf_area_0
+    - name: GigabitEthernet0/0
+      description: "UPLINK TO INTERNET PROVIDER"
+      type: 1000base-t
+      label: layer3
+      enabled: True
+      mtu: 1500
+      mgmt_only: False
+      ipv4_address: 24.24.1.2/24
+      vrf: global
+      status: active
+    - name: GigabitEthernet0/1
+      description: "DOWNLINK POD1SW1"
+      type: 1000base-t
+      label: layer3
+      enabled: True
+      mtu: 1500
+      mgmt_only: False
+      ipv4_address: 10.10.1.0/31
+      tags: 
+        - ospf_area_0
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: pod1sw1
+        int: GigabitEthernet0/0
+    - name: GigabitEthernet0/2
+      description: "DOWNLINK POD1SW2"
+      type: 1000base-t
+      label: layer3
+      enabled: True
+      mtu: 1500
+      mgmt_only: False
+      ipv4_address: 10.10.1.2/31
+      tags: 
+        - ospf_area_0
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: pod1sw2
+        int: GigabitEthernet0/0
+    - name: GigabitEthernet0/7
+      description: "MGMT-INTERFACE"
+      type: 1000base-t
+      label: mgmt
+      enabled: True
+      mtu: 1500
+      mgmt_only: True
+      ipv4_address: 192.168.4.17/24
+      vrf: MGMT
+      status: active
+  disabled_interfaces:
+    - name: GigabitEthernet0/3
+      type: 1000base-t
+      enabled: false
+    - name: GigabitEthernet0/4
+      type: 1000base-t
+      enabled: false
+    - name: GigabitEthernet0/5
+      type: 1000base-t
+      enabled: false
+    - name: GigabitEthernet0/6
+      type: 1000base-t
+      enabled: false    

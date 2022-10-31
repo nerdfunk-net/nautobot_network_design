@@ -1,0 +1,55 @@
+from pynautobot import api
+import yaml 
+import os
+
+
+PYTHONWARNINGS="ignore:Unverified HTTPS request"
+
+data_file = "../inventory/device_properties.yaml"
+
+with open(data_file) as f: 
+    data = yaml.safe_load(f.read())
+
+nb = api(url="http://127.0.0.1:8000", token="18acb72f4f8df7d5b939492edaebc88a0992640d")
+nb.http_session.verify = False
+
+# manufacturers
+for manufacturer in data["manufacturers"]:
+    print(f"Creating or Updating Manufacture {manufacturer['name']}")
+    nb_data = nb.dcim.manufacturers.get(slug=manufacturer["slug"])
+    if not nb_data:
+        nb_data = nb.dcim.manufacturers.create(name=manufacturer["name"], slug=manufacturer["slug"])
+
+# device_types
+for device_type in data["device_types"]:
+    print(f"Creating or Updating device_type {device_type['model']}")
+    nb_data = nb.dcim.device_types.get(slug=device_type["slug"])
+    if not nb_data:
+        nb_data = nb.dcim.device_types.create(
+            model = device_type["model"], 
+            slug = device_type["slug"], 
+            manufacturer = nb.dcim.manufacturers.get(slug=device_type["manufacturer_slug"]).id, 
+            height = device_type["height"]
+        )
+
+# device_roles
+for device_role in data["device_roles"]:
+    print(f"Creating or Updating device_role {device_role['name']}")
+    nb_data = nb.dcim.device_roles.get(slug=device_role["slug"])
+    if not nb_data:
+        nb_data = nb.dcim.device_roles.create(
+            name=device_role["name"], 
+            slug=device_role["slug"], 
+            color=device_role["color"]
+            )
+
+# platforms
+for platform in data["platforms"]:
+    print(f"Creating or Updating platform {platform['name']}")
+    nb_data = nb.dcim.platforms.get(slug=platform["slug"])
+    if not nb_data:
+        nb_data = nb.dcim.platforms.create(
+            name=platform["name"], 
+            slug=platform["slug"], 
+            manufacturer=nb.dcim.manufacturers.get(slug=platform["manufacturer_slug"]).id 
+            )

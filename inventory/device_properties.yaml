@@ -1,0 +1,16 @@
+manufacturers:
+- name: cisco
+  slug: cisco
+platforms:
+    - name: ios
+      slug: ios
+      napalm_driver: ios
+device_types:
+    - name: vios_router
+      slug: vios_router
+      model: c8000v
+      manufacturer_slug: cisco
+device_roles:
+    - name: pod_router
+      slug: pod_router
+
