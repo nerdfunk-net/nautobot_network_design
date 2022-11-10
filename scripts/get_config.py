@@ -1,11 +1,17 @@
 from pynautobot import api
-import yaml 
+import jinja2
+import yaml
 import os
 import json
 
 
 PYTHONWARNINGS="ignore:Unverified HTTPS request"
 data_file = "../inventory/sites.yaml"
+templateLoader = jinja2.FileSystemLoader(searchpath="/Users/marc/Programming/nerdfunk/nautobot_jinja_templates/")
+templateEnv = jinja2.Environment(loader=templateLoader, trim_blocks=True)
+TEMPLATE_FILE = "cisco_ios.j2"
+template = templateEnv.get_template(TEMPLATE_FILE)
+
 query = """
 query ($device_id: ID!) {
   device(id: $device_id) {
@@ -109,5 +115,6 @@ nb = api(url="http://127.0.0.1:8000", token="18acb72f4f8df7d5b939492edaebc88a099
 nb.http_session.verify = False
 
 variables = {"device_id": "3f6ceddb-7596-4835-a54e-6b3a864be86a"}
-graphql_response = nb.graphql.query(query=query, variables=variables)
-print (json.dumps(graphql_response.json, indent=4))
+data = nb.graphql.query(query=query, variables=variables).json
+#print(json.dumps(data, indent=4))
+print(template.render(data["data"]["device"]))
