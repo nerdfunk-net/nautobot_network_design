@@ -11,3 +11,6 @@ prefixe:
     location: floor 1
     role: access_switch
     devicetype: access_switch
+  192.168.0.0/24:
+    site: my192site
+
