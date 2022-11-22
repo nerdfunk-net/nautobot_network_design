@@ -13,5 +13,3 @@ prefixe:
     devicetype: access_switch
   192.168.0.0/24:
     site: my192site
-  192.168.10.0/24:
-    site: mytestsite
