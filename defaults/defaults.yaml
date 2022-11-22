@@ -1,0 +1,13 @@
+---
+prefixe:
+  0.0.0.0/0:
+    manufacturer: cisco
+    status: active
+    platform: cisco_ios
+  10.0.0.0/8:
+    site: mysite
+  10.10.0.0/24:
+    site: test
+    location: floor 1
+    role: access_switch
+    devicetype: access_switch
