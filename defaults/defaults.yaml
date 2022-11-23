@@ -5,7 +5,8 @@ prefixe:
     status: active
     platform: cisco_ios
     site: default_site
-    role: access_switch
+    role: default_role
+    devicetype: default_device
   10.0.0.0/8:
     site: stillnouse
   10.10.0.0/24:
