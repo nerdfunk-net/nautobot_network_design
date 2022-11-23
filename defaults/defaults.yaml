@@ -4,10 +4,11 @@ prefixe:
     manufacturer: cisco
     status: active
     platform: cisco_ios
+    site: nouse
   10.0.0.0/8:
-    site: mysite
+    site: stillnouse
   10.10.0.0/24:
-    site: test
+    site: usethis
     location: floor 1
     role: access_switch
     devicetype: access_switch
