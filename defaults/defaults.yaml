@@ -18,8 +18,8 @@ prefixe:
     site: my192site
     manufacturer: arista
 sites:
-  - name: POD1
-    slug: pod1
+  - name: default_site
+    slug: default_site
     status: active
     asn: 65001
     time_zone: America/Denver
@@ -35,3 +35,10 @@ sites:
     racks:
       - name: pod1_rr_1
         status: active
+manufacturers:
+  - name: cisco
+    slug: cisco
+    description: Cisco Systems
+  - name: arista
+    slug: arista
+    description: Arista
