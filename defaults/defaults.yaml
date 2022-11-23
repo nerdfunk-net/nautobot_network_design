@@ -19,6 +19,7 @@ prefixe:
     manufacturer: arista
 sites:
   - name: POD1
+    slug: pod1
     status: active
     asn: 65001
     time_zone: America/Denver
@@ -30,8 +31,7 @@ sites:
     contact_name: Joe
     contact_phone: 867-5309
     contact_email: joe@pod1.com
-    slug: pod1
-    comments:  Placeholder
+    comments:  My comment
     racks:
       - name: pod1_rr_1
         status: active
