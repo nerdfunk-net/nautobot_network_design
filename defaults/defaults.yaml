@@ -42,3 +42,9 @@ manufacturers:
   - name: arista
     slug: arista
     description: Arista
+platforms:
+    - name: ios
+      slug: ios
+      description: IOS
+      manufacturer: cisco
+      napalm_driver: ios
